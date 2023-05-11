@@ -12,5 +12,5 @@ class ErrorHandler(BaseHTTPMiddleware):
         try:
             return await call_next(request)
         except Exception as e:
-            print(e)
-            return requests.get("https://http.cat/500")
+            requests.get("https://http.cat/500")
+            return print(e)
