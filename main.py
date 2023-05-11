@@ -1,16 +1,19 @@
-# This is a sample Python script.
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+from config.database import engine, Base
+from middlewares.error_handler import ErrorHandler
+from routers.user import user_router
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+app = FastAPI()
+app.title = "Colgado API"
+
+app.add_middleware(ErrorHandler)
+app.include_router(user_router)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+Base.metadata.create_all(bind=engine)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+@app.get('/', tags=['home'])
+def message():
+    return HTMLResponse('<h1>Hello world</h1>')
