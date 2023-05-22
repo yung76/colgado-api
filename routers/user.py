@@ -52,6 +52,6 @@ def delete_user(id: int) -> dict:
     db = Session()
     result = UserService(db).get_user(id)
     if not result:
-        return JSONResponse(status_code=404, content={'message': "No encontrado"})
+        return JSONResponse(status_code=404, content={'message': "No encontrado "})
     UserService(db).delete_movie(id)
     return JSONResponse(status_code=200, content={"message": "Se ha eliminado la película"})
