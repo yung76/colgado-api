@@ -22,14 +22,14 @@ class UserService:
         self.db.commit()
         return
 
-    def update_movie(self, id: int, data: User):
+    def update_user(self, id: int, data: User):
         user = self.db.query(UserModel).filter(UserModel.id == id).first()
         user.email = data.email
         user.password = data.password
         self.db.commit()
         return
 
-    def delete_movie(self, id: int):
+    def delete_user(self, id: int):
         self.db.query(UserModel).filter(UserModel.id == id).delete()
         self.db.commit()
         return
